@@ -70,36 +70,66 @@ To get all existing quizzes in the service, the client sends the `GET` request t
 The response contains a JSON with quizzes (inside `content`) and some additional metadata:
 ```yaml
 {
-   "content":[
-      {
-        "id":1,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+    "content": [
+        {
+            "id": 1,
+            "title": "Coffee drinks",
+            "text": "Select only coffee drinks.",
+            "options": [
+                "Americano",
+                "Tea",
+                "Cappuccino",
+                "Sprite"
+            ]
         },
-      {
-        "id":2,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+        {
+            "id": 2,
+            "title": "Coffee drinks",
+            "text": "Select only coffee drinks.",
+            "options": [
+                "Americano",
+                "Tea",
+                "Cappuccino",
+                "Sprite"
+            ]
         },
-      {
-        "id":3,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
-      },
-      {
-        "id":4,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+        {
+            "id": 3,
+            "title": "Coffee drinks",
+            "text": "Select only coffee drinks.",
+            "options": [
+                "Americano",
+                "Tea",
+                "Cappuccino",
+                "Sprite"
+            ]
         }
-      ],
-   "pageable":{
-   "sort":{
-   "sorted":true,"unsorted":false,"empty":false
-   },
-   "pageNumber":0,"pageSize":10,"offset":0,"paged":true,"unpaged":false
-   },
-   "totalPages":1,
-   "totalElements":4,
-   "last":true,
-   "numberOfElements":4,
-   "first":true,
-   "number":0,
-   "size":10,
-   "sort":{
-   "sorted":true,"unsorted":false,"empty":false
-   },"empty":false
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "pageNumber": 0,
+        "pageSize": 10,
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 3,
+    "last": true,
+    "numberOfElements": 3,
+    "first": true,
+    "number": 0,
+    "size": 10,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "empty": false
 }
 ```
 API supports the navigation through pages by passing the page parameter ( `/api/quizzes?page=1`). If there are no quizzes, content is empty `[]`.
@@ -122,13 +152,15 @@ The service returns a JSON with two fields: `success` (`true` or `false`) and `f
 If the passed answer is correct:
 ```yaml
 {
-   "success":true,"feedback":"Congratulations, you're right!"
+    "feedback": "Congratulations, you're right",
+    "success": true
 }
 ```
 If the answer is incorrect:
 ```yaml
 {
-  "success":false,"feedback":"Wrong answer! Please, try again."
+    "feedback": "Wrong answer! Please, try again.",
+    "success": false
 }
 ```
 If the specified quiz does not exist, the server returns the 404 (Not found) status code.
@@ -144,29 +176,41 @@ It contains a JSON with quizzes (inside content) and some additional metadata as
 Here is a response example:
 ```yaml
 {
-  "content":[
-    {
-    "id":1,"completedAt":"2020-06-01T19:38:52.795504"
+    "content": [
+        {
+            "id": 1,
+            "completedAt": "2020-06-05T10:38:08.394800400"
+        },
+        {
+            "id": 1,
+            "completedAt": "2020-06-04T19:31:36.979609600"
+        },        
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "pageNumber": 0,
+        "pageSize": 10,
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
     },
-    {
-    "id":1,"completedAt":"2020-06-01T19:38:51.145409600"
-    }],
-  "pageable":{
-  "sort":{
-  "sorted":true,"unsorted":false,"empty":false
-  },
-  "pageNumber":0,
-  "pageSize":10,
-  "offset":0,
-  "paged":true,
-  "unpaged":false},
-  "totalPages":1,
-  "totalElements":2,
-  "last":true,"numberOfElements":2,
-  "first":true,"number":0,"size":10,
-  "sort":{
-  "sorted":true,"unsorted":false,"empty":false
-  },"empty":false
+    "totalPages": 1,
+    "totalElements": 5,
+    "last": true,
+    "numberOfElements": 5,
+    "first": true,
+    "number": 0,
+    "size": 10,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "empty": false
 }
 ```
 If there are no quizzes, content is empty `[]`.
