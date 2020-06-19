@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User {
@@ -87,5 +88,23 @@ public class User {
 
     public void setSuccessQuizList(List<SuccessQuiz> successQuizList) {
         this.successQuizList = successQuizList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId() == user.getId() &&
+                getEmail().equals(user.getEmail()) &&
+                getPassword().equals(user.getPassword()) &&
+                Objects.equals(getQuizList(), user.getQuizList()) &&
+                Objects.equals(getSuccessQuizList(), user.getSuccessQuizList()) &&
+                getRole().equals(user.getRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getPassword(), getQuizList(), getSuccessQuizList(), getRole());
     }
 }

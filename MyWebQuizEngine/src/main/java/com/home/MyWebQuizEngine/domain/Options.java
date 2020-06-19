@@ -2,6 +2,7 @@ package com.home.MyWebQuizEngine.domain;
 import com.home.MyWebQuizEngine.domain.Quiz;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Options {
@@ -48,5 +49,19 @@ public class Options {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Options)) return false;
+        Options options1 = (Options) o;
+        return getId() == options1.getId() &&
+                Objects.equals(options, options1.options) &&
+                Objects.equals(getQuiz(), options1.getQuiz());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), options, getQuiz());
+    }
 }
 
