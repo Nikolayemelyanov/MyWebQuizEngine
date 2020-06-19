@@ -69,21 +69,38 @@ Here is a response example:
 To get all existing quizzes in the service, the client sends the `GET` request to `/api/quizzes`.
 The response contains a JSON with quizzes (inside `content`) and some additional metadata:
 ```yaml
-{"content":[
-{"id":1,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":2,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":3,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":4,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]}],
-"pageable":{"sort":{"sorted":true,"unsorted":false,"empty":false},
-"pageNumber":0,"pageSize":10,"offset":0,"paged":true,"unpaged":false},
-"totalPages":1,
-"totalElements":4,
-"last":true,
-"numberOfElements":4,
-"first":true,
-"number":0,
-"size":10,
-"sort":{"sorted":true,"unsorted":false,"empty":false},"empty":false}
+{
+   "content":[
+      {
+        "id":1,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+        },
+      {
+        "id":2,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+        },
+      {
+        "id":3,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+      },
+      {
+        "id":4,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]
+        }
+      ],
+   "pageable":{
+   "sort":{
+   "sorted":true,"unsorted":false,"empty":false
+   },
+   "pageNumber":0,"pageSize":10,"offset":0,"paged":true,"unpaged":false
+   },
+   "totalPages":1,
+   "totalElements":4,
+   "last":true,
+   "numberOfElements":4,
+   "first":true,
+   "number":0,
+   "size":10,
+   "sort":{
+   "sorted":true,"unsorted":false,"empty":false
+   },"empty":false
+}
 ```
 API supports the navigation through pages by passing the page parameter ( `/api/quizzes?page=1`). If there are no quizzes, content is empty `[]`.
 
@@ -91,20 +108,28 @@ API supports the navigation through pages by passing the page parameter ( `/api/
 
 To solve a quiz, the client sends the `POST` request to `/api/quizzes/{id}/solve` with a JSON that contains the indexes of all chosen options as the answer.
 Here is an example:
+
 ```yaml
-{"answer": [0,2]} 
+{
+  "answer": [0,2]
+} 
 ```
+
 It is also possible to send an empty array `[]` since some quizzes may not have correct options.
 
 The service returns a JSON with two fields: `success` (`true` or `false`) and `feedback` (just a string). There are three possible responses.
 
 If the passed answer is correct:
 ```yaml
-{"success":true,"feedback":"Congratulations, you're right!"}
+{
+   "success":true,"feedback":"Congratulations, you're right!"
+}
 ```
 If the answer is incorrect:
 ```yaml
-{"success":false,"feedback":"Wrong answer! Please, try again."}
+{
+  "success":false,"feedback":"Wrong answer! Please, try again."
+}
 ```
 If the specified quiz does not exist, the server returns the 404 (Not found) status code.
 
@@ -118,22 +143,35 @@ It contains a JSON with quizzes (inside content) and some additional metadata as
 
 Here is a response example:
 ```yaml
-{"content":[
-{"id":1,"completedAt":"2020-06-01T19:38:52.795504"},
-{"id":1,"completedAt":"2020-06-01T19:38:51.145409600"}],
-"pageable":{"sort":{"sorted":true,"unsorted":false,"empty":false},
-"pageNumber":0,
-"pageSize":10,
-"offset":0,
-"paged":true,
-"unpaged":false},
-"totalPages":1,
-"totalElements":2,
-"last":true,"numberOfElements":2,
-"first":true,"number":0,"size":10,
-"sort":{"sorted":true,"unsorted":false,"empty":false},"empty":false}
-If there are no quizzes, content is empty [].
+{
+  "content":[
+    {
+    "id":1,"completedAt":"2020-06-01T19:38:52.795504"
+    },
+    {
+    "id":1,"completedAt":"2020-06-01T19:38:51.145409600"
+    }],
+  "pageable":{
+  "sort":{
+  "sorted":true,"unsorted":false,"empty":false
+  },
+  "pageNumber":0,
+  "pageSize":10,
+  "offset":0,
+  "paged":true,
+  "unpaged":false},
+  "totalPages":1,
+  "totalElements":2,
+  "last":true,"numberOfElements":2,
+  "first":true,"number":0,"size":10,
+  "sort":{
+  "sorted":true,"unsorted":false,"empty":false
+  },"empty":false
+}
 ```
-All data is stored in embedded H2 database. 
+If there are no quizzes, content is empty `[]`.
+
+All data is stored in embedded H2 database.
+
 ## Acknowledgment
 The project was developed with the support from [JetBrainsAcademy](https://hyperskill.org).
