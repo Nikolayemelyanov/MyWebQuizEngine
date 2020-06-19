@@ -1,90 +1,11 @@
-# MyWebQuizEngine
- Backend SpringBoot MicroService with Authenication 
 
-## About
-In the Internet, you can often find sites where you need to answer some questions. It can be educational sites, sites with psychological tests, job search services, or just entertaining sites like web quests. The common thing for them is the ability to answer questions (or quizzes) and then see some results. This project is a multi-users web service for creating and solving quizzes.
-
-## Registration and Autentication
-
-First of all, client should register its personal account to use MyWebQuizEngine features.
-Client needs to send a JSON with email and password via POST request to /api/register:
-
-```
-{
-  "email": "test@gmail.com",
-  "password": "secret"
-}
-```
-The microservice uses HTTP Basic Auth for each request, i.e. create, solve, get one, get all, delete quiz.
-The only operation that does not require authorization is the registration.
-A user can delete their quiz by sending the DELETE request to /api/quizzes/{id}. If the specified user is not the author of this quiz, the response is the 403 (Forbidden) status code.
-
-## Creating a Quiz
-
-To create a new quiz, the client needs to send a JSON as the request's body via POST to /api/quizzes. The JSON should contain the four fields:
-
-title: a string, required;
-text: a string, required;
-options: an array of strings, required, should contain at least 2 items;
-answer: an array of indexes of correct options, optional, since all options can be wrong.
-
-Here is an example:
-```
-{
-  "title": "Coffee drinks",
-  "text": "Select only coffee drinks.",
-  "options": ["Americano","Tea","Cappuccino","Sprite"],
-  "answer": [0,2]
-}
-```
-The server response of the example is here:
-```
-{
-  "id": 1,
-  "title": "Coffee drinks",
-  "text": "Select only coffee drinks.",
-  "options": ["Americano","Tea","Cappuccino","Sprite"]
-}
-```
-The id field is a generated unique integer identifier for the quiz. Also, the response doesn't include the answer field.
-
-If the request JSON does not contain title or text, or they are empty strings (""), then the server should respond with the  400 (Bad request) status code. If the number of options in the quiz is less than 2, the server returns the same status code.
-
-## Get a quiz by id
-
-To get a quiz by id, the client sends the GET request to /api/quizzes/{id}.
-
-Here is a response example:
-```
-{
-  "id": 1,
-  "title": "The Java Logo",
-  "text": "What is depicted on the Java logo?",
-  "options": ["Robot","Tea leaf","Cup of coffee","Bug"]
-}
-```
-## Get all quizzes
-
-To get all existing quizzes in the service, the client sends the GET request to /api/quizzes.
-The response contains a JSON with quizzes (inside content) and some additional metadata:
-```
-{"content":[
-{"id":1,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":2,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":3,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
-{"id":4,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]}],
-"pageable":{"sort":{"sorted":true,"unsorted":false,"empty":false},
-"pageNumber":0,"pageSize":10,"offset":0,"paged":true,"unpaged":false},
-"totalPages":1,
-"totalElements":4,
-"last":true,
 # MyWebQuizEngine
  Backend SpringBoot MicroService with Authenication 
 ***
 ## About
 In the Internet, you can often find sites where you need to answer some questions. It can be educational sites, sites with psychological tests, job search services, or just entertaining sites like web quests. The common thing for them is the ability to answer questions (or quizzes) and then see some results. This project is a multi-users web service for creating and solving quizzes.
 
-## Registration and Autentication
+## Registration and Authentication
 
 First of all, client should register its personal account to use MyWebQuizEngine features.
 Client needs to send a JSON with email and password via `POST` request to `/api/register`:
