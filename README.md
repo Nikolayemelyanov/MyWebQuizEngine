@@ -10,7 +10,7 @@ In the Internet, you can often find sites where you need to answer some question
 First of all, client should register its personal account to use MyWebQuizEngine features.
 Client needs to send a JSON with email and password via `POST` request to `/api/register`:
 
-```json
+```yaml
 {
   "email": "test@gmail.com",
   "password": "secret"
@@ -30,7 +30,7 @@ To create a new quiz, the client needs to send a JSON as the request's body via 
 `answer`: an array of indexes of correct options, optional, since all options can be wrong.
 
 Here is an example:
-```json
+```yaml
 {
   "title": "Coffee drinks",
   "text": "Select only coffee drinks.",
@@ -39,7 +39,7 @@ Here is an example:
 }
 ```
 The server response of the example is here:
-```json
+```yaml
 {
   "id": 1,
   "title": "Coffee drinks",
@@ -51,12 +51,12 @@ The `id` field is a generated unique integer identifier for the quiz. Also, the 
 
 If the request JSON does not contain title or text, or they are empty strings (`""`), then the server should respond with the  `400 (Bad request)` status code. If the number of options in the quiz is less than 2, the server returns the same status code.
 
-## Get a quiz by id
+## Get a Quiz by Id
 
-To get a quiz by id, the client sends the `GET` request to `/api/quizzes/{id}`.
+To get a quiz by `id`, the client sends the `GET` request to `/api/quizzes/{id}`.
 
 Here is a response example:
-```json
+```yaml
 {
   "id": 1,
   "title": "The Java Logo",
@@ -64,11 +64,11 @@ Here is a response example:
   "options": ["Robot","Tea leaf","Cup of coffee","Bug"]
 }
 ```
-## Get all quizzes
+## Get all Quizzes
 
 To get all existing quizzes in the service, the client sends the `GET` request to `/api/quizzes`.
 The response contains a JSON with quizzes (inside `content`) and some additional metadata:
-```json
+```yaml
 {"content":[
 {"id":1,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
 {"id":2,"title":"Coffee drinks","text":"Select only coffee drinks.","options":["Americano","Tea","Cappuccino","Sprite"]},
@@ -87,11 +87,11 @@ The response contains a JSON with quizzes (inside `content`) and some additional
 ```
 API supports the navigation through pages by passing the page parameter ( `/api/quizzes?page=1`). If there are no quizzes, content is empty `[]`.
 
-## Solving a quiz
+## Solving a Quiz
 
 To solve a quiz, the client sends the `POST` request to `/api/quizzes/{id}/solve` with a JSON that contains the indexes of all chosen options as the answer.
 Here is an example:
-```json
+```yaml
 {"answer": [0,2]} 
 ```
 It is also possible to send an empty array `[]` since some quizzes may not have correct options.
@@ -99,17 +99,17 @@ It is also possible to send an empty array `[]` since some quizzes may not have 
 The service returns a JSON with two fields: `success` (`true` or `false`) and `feedback` (just a string). There are three possible responses.
 
 If the passed answer is correct:
-```json
+```yaml
 {"success":true,"feedback":"Congratulations, you're right!"}
 ```
 If the answer is incorrect:
-```json
+```yaml
 {"success":false,"feedback":"Wrong answer! Please, try again."}
 ```
 If the specified quiz does not exist, the server returns the 404 (Not found) status code.
 
 
-## Get all completions of quizzes with paging 
+## Get all completions of Quizzes with paging 
 
 Microservice provides an operation for getting all completions of quizzes for a specified user by sending the `GET` request to `/api/quizzes/completed` together with the user auth data. All the completions are sorted from the most recent to the oldest.
 
@@ -117,7 +117,7 @@ A response is separated by pages since the service may return a lot of data.
 It contains a JSON with quizzes (inside content) and some additional metadata as in the previous operation.
 
 Here is a response example:
-```json
+```yaml
 {"content":[
 {"id":1,"completedAt":"2020-06-01T19:38:52.795504"},
 {"id":1,"completedAt":"2020-06-01T19:38:51.145409600"}],
