@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/api/register", method = RequestMethod.POST, consumes = "application/json")
+    @PostMapping(value = "/api/register", consumes = "application/json")
     public void createNewUser(@Valid @RequestBody User user) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {

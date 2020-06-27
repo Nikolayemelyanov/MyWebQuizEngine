@@ -23,7 +23,7 @@ public class User {
     @NotEmpty()
     private String password;
 
-    @OneToMany(targetEntity = Quiz.class)
+    @OneToMany(targetEntity = Quiz.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="UserId")
     private List<Quiz> quizList;
 

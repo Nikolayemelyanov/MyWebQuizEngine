@@ -1,0 +1,4 @@
+2020-06-27 15:11:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "ЫУДУСЕ[*] * АКЩЬ ЙГШЯ"
+Syntax error in SQL statement "ЫУДУСЕ[*] * АКЩЬ ЙГШЯ"; SQL statement:
+ыудусе * акщь йгшя [42000-200]

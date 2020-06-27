@@ -1,14 +1,13 @@
 package com.home.MyWebQuizEngine.domain;
 
-public class Response {
+public class QuizResponse {
     private String feedback;
     private boolean success;
-    public Response (boolean success, String feedback) {
+    public QuizResponse(boolean success, String feedback) {
         this.success = success;
         this.feedback =feedback;
 
     }
-
     public String getFeedback() {
         return feedback;
     }

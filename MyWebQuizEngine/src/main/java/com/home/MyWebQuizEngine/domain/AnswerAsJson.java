@@ -2,14 +2,14 @@ package com.home.MyWebQuizEngine.domain;
 
 import java.util.Arrays;
 
-public class InitialAnswer {
+public class AnswerAsJson {
     private int[] answer;
-    public InitialAnswer(){}
-    public InitialAnswer(int[] answer) {
+    public AnswerAsJson(){}
+    public AnswerAsJson(int[] answer) {
         this.answer = answer;
     }
 
-    public int[] getAnswer() {
+    public int[] getAnswersArray() {
         return answer;
     }
 
@@ -20,13 +20,13 @@ public class InitialAnswer {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof InitialAnswer)) return false;
-        InitialAnswer that = (InitialAnswer) o;
-        return Arrays.equals(getAnswer(), that.getAnswer());
+        if (!(o instanceof AnswerAsJson)) return false;
+        AnswerAsJson that = (AnswerAsJson) o;
+        return Arrays.equals(getAnswersArray(), that.getAnswersArray());
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(getAnswer());
+        return Arrays.hashCode(getAnswersArray());
     }
 }

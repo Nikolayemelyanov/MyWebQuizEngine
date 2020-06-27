@@ -63,5 +63,8 @@ public class UserDetailsImpl implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getEmail() {
+        return this.getUsername();
+    }
 }
 
