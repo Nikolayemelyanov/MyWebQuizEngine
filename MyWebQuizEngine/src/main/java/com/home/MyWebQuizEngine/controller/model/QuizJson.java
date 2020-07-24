@@ -1,6 +1,8 @@
-package com.home.MyWebQuizEngine.domain;
+package com.home.MyWebQuizEngine.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.home.MyWebQuizEngine.domain.Option;
+import com.home.MyWebQuizEngine.domain.Quiz;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

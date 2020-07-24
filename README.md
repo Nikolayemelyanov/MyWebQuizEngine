@@ -141,7 +141,7 @@ Here is an example:
 
 ```yaml
 {
-  "answer": [0,2]
+  "answers": [0,2]
 } 
 ```
 

@@ -1,6 +1,7 @@
 package com.home.MyWebQuizEngine.domain;
+import com.home.MyWebQuizEngine.controller.model.QuizJson;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
