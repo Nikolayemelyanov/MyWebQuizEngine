@@ -13,6 +13,8 @@ public interface QuizService {
 
     Quiz saveQuiz(Quiz quiz, User user);
 
+    Quiz updateQuiz(Quiz quiz);
+
     Quiz getQuizById(long id);
 
     List<Quiz> listAllQuizzes();

@@ -1,5 +1,5 @@
 package com.home.MyWebQuizEngine.controller;
-
+import com.home.MyWebQuizEngine.controller.model.UserJson;
 import com.home.MyWebQuizEngine.services.UserService;
 import com.home.MyWebQuizEngine.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,13 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/api/register", consumes = "application/json")
-    public void createNewUser(@Valid @RequestBody User user) {
-        User userExists = userService.findUserByEmail(user.getEmail());
+    public void createNewUser(@Valid @RequestBody UserJson userJson) {
+        User requestUser = userJson.convertToUser();
+        User userExists = userService.findUserByUsername(requestUser.getUsername());
         if (userExists != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } else {
-            userService.saveUser(user);
+            userService.saveUser(requestUser);
         }
     }
 }

@@ -13,6 +13,7 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
+
     private long id;
 
     private String title;
@@ -41,7 +42,6 @@ public class Quiz {
     }
 
     public List<Option> getOptions() {
-
         return optionsList;
     }
 
@@ -54,8 +54,7 @@ public class Quiz {
     }
 
     public void setOptions(List<Option> optionsList) {
-
-        this.optionsList = optionsList;
+            this.optionsList = optionsList;
     }
 
     public void setText(String text) {

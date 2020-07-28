@@ -13,14 +13,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "EMAIL")
-    @NotEmpty
-    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
-    private String email;
+    private String username;
 
-    @Column(name = "PASSWORD")
-    @Length(min = 5)
-    @NotEmpty()
     private String password;
 
     @OneToMany(targetEntity = Quiz.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -35,20 +29,20 @@ public class User {
 
     public User(){}
 
-    public User(String email, String password, List<Quiz> quizList, List<SuccessQuiz> successQuizList ) {
-        this.email = email;
-        this.password = password;
-        this.quizList = quizList;
-        this.successQuizList =successQuizList;
-    }
+//    public User(String email, String password, List<Quiz> quizList, List<SuccessQuiz> successQuizList ) {
+//        this.email = email;
+//        this.password = password;
+//        this.quizList = quizList;
+//        this.successQuizList =successQuizList;
+//    }
 
     public long getId() {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
+   // public String getEmail() {
+//        return email;
+//    }
 
     public String getPassword() {
         return password;
@@ -62,12 +56,20 @@ public class User {
         this.id = id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setQuizList(List<Quiz> quizList) {
@@ -96,7 +98,7 @@ public class User {
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return getId() == user.getId() &&
-                getEmail().equals(user.getEmail()) &&
+                getUsername().equals(user.getUsername()) &&
                 getPassword().equals(user.getPassword()) &&
                 Objects.equals(getQuizList(), user.getQuizList()) &&
                 Objects.equals(getSuccessQuizList(), user.getSuccessQuizList()) &&
@@ -105,6 +107,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEmail(), getPassword(), getQuizList(), getSuccessQuizList(), getRole());
+        return Objects.hash(getId(), getUsername(), getPassword(), getQuizList(), getSuccessQuizList(), getRole());
     }
 }

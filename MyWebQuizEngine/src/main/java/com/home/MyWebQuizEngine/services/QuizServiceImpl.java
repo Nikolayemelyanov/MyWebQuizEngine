@@ -6,13 +6,10 @@ import com.home.MyWebQuizEngine.domain.SuccessQuiz;
 import com.home.MyWebQuizEngine.domain.User;
 import com.home.MyWebQuizEngine.repositories.QuizRepository;
 import com.home.MyWebQuizEngine.repositories.SuccessQuizRepository;
-import com.home.MyWebQuizEngine.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,6 +41,11 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
+    public Quiz updateQuiz(Quiz quiz) {
+        return quizRepository.save(quiz);
+    }
+
+    @Override
     public Quiz getQuizById(long id) {
         if (quizRepository.findById(id).isPresent()) {
             return quizRepository.findById(id).get();
@@ -59,9 +61,10 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public void deleteQuiz(long id,User user) {
+    public void deleteQuiz(long id, User user) {
         if (quizRepository.findById(id).isPresent()) {
             if (user.getQuizList().contains(quizRepository.findById(id).get())) {
+                user.getQuizList().remove(quizRepository.findById(id).get());
                 quizRepository.deleteById(id);
                 throw new ResponseStatusException(HttpStatus.NO_CONTENT);
             } else {

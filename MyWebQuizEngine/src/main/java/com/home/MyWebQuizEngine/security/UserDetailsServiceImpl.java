@@ -22,12 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByUsername(username);
         UserDetailsImpl userDetails = new UserDetailsImpl();
         userDetails.setPassword(user.getPassword());
-        userDetails.setUsername(user.getEmail());
+        userDetails.setUsername(user.getUsername());
         userDetails.setEnabled(true);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));

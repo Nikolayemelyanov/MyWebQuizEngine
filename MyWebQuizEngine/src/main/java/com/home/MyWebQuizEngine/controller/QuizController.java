@@ -1,7 +1,6 @@
 package com.home.MyWebQuizEngine.controller;
 import com.home.MyWebQuizEngine.controller.model.AnswersJson;
 import com.home.MyWebQuizEngine.controller.model.QuizJson;
-import com.home.MyWebQuizEngine.security.UserDetailsImpl;
 import com.home.MyWebQuizEngine.domain.*;
 import com.home.MyWebQuizEngine.services.QuizService;
 import com.home.MyWebQuizEngine.services.UserService;
@@ -34,10 +33,10 @@ public class QuizController {
     public QuizController() {  }
 
     User getLoggedUser(){
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-        return userService.findUserByEmail(userDetails.getEmail());
+        return userService.findUserByUsername(userDetails.getUsername());
     }
 
     /*
@@ -79,7 +78,6 @@ public class QuizController {
         Quiz savedQuiz = quizService.saveQuiz(inputQuiz, user);
         return savedQuiz.convertToQuizJson();
     }
-
     /*
     Solve a quiz
     */

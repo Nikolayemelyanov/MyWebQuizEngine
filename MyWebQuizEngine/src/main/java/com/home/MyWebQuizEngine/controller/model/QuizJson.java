@@ -3,9 +3,6 @@ package com.home.MyWebQuizEngine.controller.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.home.MyWebQuizEngine.domain.Option;
 import com.home.MyWebQuizEngine.domain.Quiz;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
