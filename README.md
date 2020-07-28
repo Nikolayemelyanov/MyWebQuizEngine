@@ -20,7 +20,7 @@ The microservice uses HTTP Basic Auth for each request, i.e. create, solve, get 
 The only operation that does not require authorization is the registration.
 A user can delete their quiz by sending the `DELETE` request to `/api/quizzes/{id}`. If the specified user is not the author of this quiz, the response is the `403 (Forbidden)` status code.
 
-## Creating a Quiz
+## Create a Quiz
 
 To create a new quiz, the client needs to send a JSON as the request's body via POST to `/api/quizzes`. The JSON should contain the four fields:
 
@@ -50,6 +50,14 @@ The server response of the example is here:
 The `id` field is a generated unique integer identifier for the quiz. Also, the response doesn't include the answer field.
 
 If the request JSON does not contain title or text, or they are empty strings (`""`), then the server should respond with the  `400 (Bad request)` status code. If the number of options in the quiz is less than 2, the server returns the same status code.
+
+## Delete a Quiz
+
+A user can delete their quiz by sending the `DELETE` request to `/api/quizzes/{id}`.
+
+If the operation was successful, the service returns the `204 (No content)` status code without any content.
+
+If the specified quiz does not exist, the server returns `404 (Not found)`. If the specified user is not the author of this quiz, the response is the `403 (Forbidden)` status code.
 
 ## Get a Quiz by Id
 
@@ -134,7 +142,7 @@ The response contains a JSON with quizzes (inside `content`) and some additional
 ```
 API supports the navigation through pages by passing the page parameter ( `/api/quizzes?page=1`). If there are no quizzes, content is empty `[]`.
 
-## Solving a Quiz
+## Solve a Quiz
 
 To solve a quiz, the client sends the `POST` request to `/api/quizzes/{id}/solve` with a JSON that contains the indexes of all chosen options as the answer.
 Here is an example:
